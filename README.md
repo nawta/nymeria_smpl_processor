@@ -2,6 +2,12 @@
 
 A script to convert MVNX motion capture data to SMPL format.
 
+
+
+https://github.com/user-attachments/assets/ae70d5f8-799c-49a3-a74b-6ec6b94cf67b
+
+
+
 ## Overview
 
 Converts MVNX files from the Nymeria dataset's `data_xdata_mvnx` directory to SMPL parameters and saves them to `data_smpl_from_xdata_mvnx`.
@@ -62,5 +68,5 @@ This avoids pickle compatibility issues between numpy 1.x and 2.x.
 
 ## Related Projects
 
-- [MobilePoser](https://github.com/xxx/MobilePoser): SMPL estimation model
-- Nymeria Dataset: Motion capture data from Aria glasses + MVN suit
+- [AITViewer](https://github.com/eth-ait/aitviewer): SMPL Visualization tool
+- [Nymeria Dataset](https://github.com/facebookresearch/nymeria_dataset): Motion capture data from Aria glasses + MVN suit
