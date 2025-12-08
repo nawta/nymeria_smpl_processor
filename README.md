@@ -1,66 +1,66 @@
 # Nymeria SMPL Preprocessor
 
-MVNX形式のモーションキャプチャデータをSMPL形式に変換するスクリプト。
+A script to convert MVNX motion capture data to SMPL format.
 
-## 概要
+## Overview
 
-Nymeriaデータセットの`data_xdata_mvnx`に含まれるMVNXファイルをSMPLパラメータに変換し、`data_smpl_from_xdata_mvnx`に保存します。
+Converts MVNX files from the Nymeria dataset's `data_xdata_mvnx` directory to SMPL parameters and saves them to `data_smpl_from_xdata_mvnx`.
 
-## ディレクトリ構成
+## Directory Structure
 
 ```
 nymeria_smpl_preprocessor/
-├── preprocess_mvnx_to_smpl.py  # メインスクリプト
-├── mvnx_to_smpl/               # サポートライブラリ
+├── preprocess_mvnx_to_smpl.py  # Main script
+├── mvnx_to_smpl/               # Support library
 │   └── core/
-│       ├── articulate/         # SMPLボディモデル関連
-│       └── paths.py            # パス設定
+│       ├── articulate/         # SMPL body model utilities
+│       └── paths.py            # Path configuration
 └── README.md
 ```
 
-## 使用方法
+## Usage
 
 ```bash
-# デフォルト（ローカルポーズ計算あり、推奨）
+# Default (with local pose computation, recommended)
 python preprocess_mvnx_to_smpl.py
 
-# カスタムパス指定
+# Custom paths
 python preprocess_mvnx_to_smpl.py \
     --input-dir /path/to/data_xdata_mvnx \
     --output-dir /path/to/data_smpl_from_xdata_mvnx
 
-# ローカルポーズなし（非推奨）
+# Without local poses (not recommended)
 python preprocess_mvnx_to_smpl.py --no-use-articulate
 ```
 
-## 出力形式
+## Output Format
 
-各シーケンスディレクトリに以下のファイルが生成されます：
+The following files are generated in each sequence directory:
 
-- `smpl_data.npz`: 数値配列のみ（numpy 1.x/2.x互換）
-  - `global_poses`: グローバル回転行列 (N, 24, 3, 3)
-  - `local_poses`: ローカル回転行列 (N, 24, 3, 3)
-  - `root_positions`: ルート位置 (N, 3)
+- `smpl_data.npz`: Numeric arrays only (numpy 1.x/2.x compatible)
+  - `global_poses`: Global rotation matrices (N, 24, 3, 3)
+  - `local_poses`: Local rotation matrices (N, 24, 3, 3)
+  - `root_positions`: Root positions (N, 3)
 
-- `smpl_data.json`: メタデータ
-  - `joint_names`: ジョイント名リスト
-  - `metadata`: フレームレートなど
-  - `num_frames`: フレーム数
-  - `*_shape`: 各配列の形状
+- `smpl_data.json`: Metadata
+  - `joint_names`: List of joint names
+  - `metadata`: Frame rate and other info
+  - `num_frames`: Number of frames
+  - `*_shape`: Shape of each array
 
-## Numpy互換性について
+## NumPy Compatibility
 
-npzファイルには数値配列のみを保存し、メタデータはJSONに分離しています。
-これにより、numpy 1.x と 2.x の間でのpickle互換性問題を回避しています。
+The npz files contain only numeric arrays, with metadata stored separately in JSON.
+This avoids pickle compatibility issues between numpy 1.x and 2.x.
 
-## 依存関係
+## Dependencies
 
 - Python 3.8+
 - PyTorch
-- NumPy (1.x または 2.x)
+- NumPy (1.x or 2.x)
 - tqdm
 
-## 関連プロジェクト
+## Related Projects
 
-- [MobilePoser](https://github.com/xxx/MobilePoser): SMPL推定モデル
-- Nymeria Dataset: Aria glasses + MVNスーツによるモーションキャプチャデータ
+- [MobilePoser](https://github.com/xxx/MobilePoser): SMPL estimation model
+- Nymeria Dataset: Motion capture data from Aria glasses + MVN suit
