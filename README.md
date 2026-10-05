@@ -24,6 +24,13 @@ nymeria_smpl_preprocessor/
 └── README.md
 ```
 
+## Setup: SMPL model
+
+The SMPL body model is not included in this repository, because its license does not allow redistribution.
+
+1. Register at https://smpl.is.tue.mpg.de/ and download "SMPL for Python".
+2. Copy the male model file (`basicmodel_m_lbs_10_207_0_v1.1.0.pkl` in version 1.1.0) to `mvnx_to_smpl/assets/smpl/basicmodel_m.pkl`.
+
 ## Usage
 
 ```bash
@@ -65,6 +72,10 @@ This avoids pickle compatibility issues between numpy 1.x and 2.x.
 - PyTorch
 - NumPy (1.x or 2.x)
 - tqdm
+
+## Third-party code
+
+`mvnx_to_smpl/core/articulate/` is a copy of [articulate](https://github.com/Xinyu-Yi/articulate) by Xinyu Yi. See [its NOTICE](mvnx_to_smpl/core/articulate/NOTICE.md).
 
 ## Related Projects
 
