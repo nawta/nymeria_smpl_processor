@@ -77,6 +77,10 @@ This avoids pickle compatibility issues between numpy 1.x and 2.x.
 
 `mvnx_to_smpl/core/articulate/` is a copy of [articulate](https://github.com/Xinyu-Yi/articulate) by Xinyu Yi. See [its NOTICE](mvnx_to_smpl/core/articulate/NOTICE.md).
 
+## License
+
+The code in this repository is released under [CC BY-NC 4.0](LICENSE), the same license as the [Nymeria dataset code](https://github.com/facebookresearch/nymeria_dataset). Non-commercial use only. The SMPL model and the copied `articulate` code keep their own terms (see above).
+
 ## Related Projects
 
 - [AITViewer](https://github.com/eth-ait/aitviewer): SMPL Visualization tool
