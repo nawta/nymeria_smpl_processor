@@ -53,13 +53,33 @@ The following files are generated in each sequence directory:
 - `smpl_data.npz`: Numeric arrays only (numpy 1.x/2.x compatible)
   - `global_poses`: Global rotation matrices (N, 24, 3, 3)
   - `local_poses`: Local rotation matrices (N, 24, 3, 3)
-  - `root_positions`: Root positions (N, 3)
+  - `root_positions`: Pelvis positions in meters (N, 3)
+
+Poses and positions are in a Y-up frame. `local_poses[:, 0]` is the root orientation and `local_poses[:, 1:]` are the other 23 joints, each relative to its parent.
 
 - `smpl_data.json`: Metadata
   - `joint_names`: List of joint names
   - `metadata`: Frame rate and other info
   - `num_frames`: Number of frames
   - `*_shape`: Shape of each array
+
+## Viewing and exporting meshes
+
+Two scripts in `tools/` turn `smpl_data.npz` into something you can look at. Both use the SMPL model from "Setup: SMPL model".
+
+```bash
+# Write PLY meshes (one file per frame) for Blender, MeshLab, etc.
+python tools/export_ply.py path/to/smpl_data.npz --frames 0:2400:240 --out-dir meshes
+
+# Play the sequence in aitviewer
+python tools/view_aitviewer.py path/to/smpl_data.npz --fps 30
+```
+
+For aitviewer, `pip install aitviewer`, then copy the SMPL model to `<smplx_models>/smpl/SMPL_MALE.pkl`, where `<smplx_models>` is the folder named by `smplx_models` in aitviewer's config file (`aitvconfig.yaml` in your working directory, for example `smplx_models: /path/to/body_models`). `--fps` subsamples the source frame rate stored in `smpl_data.json`, so the actual rate is the source rate divided by a whole number; the script prints it.
+
+`export_ply.py` accepts `--frames all`, a single index, or `start:stop:step`. Both scripts place the pelvis at `root_positions`.
+
+If loading the SMPL file fails with `No module named 'chumpy'`, the file is from an older SMPL release that stores its arrays as chumpy objects. Installing `chumpy` fixes it; chumpy needs NumPy older than 1.24.
 
 ## NumPy Compatibility
 
